@@ -1,10 +1,10 @@
-interface StepCardProps {
+export interface HowItWorksStepCardProps {
   number: string;
   title: string;
   description: string;
 }
 
-export function StepCard({ number, title, description }: StepCardProps) {
+export function HowItWorksStepCard({ number, title, description }: HowItWorksStepCardProps) {
   return (
     <div className="flex flex-col items-center text-center p-6 relative">
       <div className="w-16 h-16 rounded-full bg-soft-sage flex items-center justify-center text-jungle-green font-serif text-2xl mb-6 shadow-sm">

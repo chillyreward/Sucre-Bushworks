@@ -8,7 +8,7 @@ import { CampsiteCard } from "@/components/cards/CampsiteCard";
 import { ProductCard } from "@/components/cards/ProductCard";
 import { TripCard } from "@/components/cards/TripCard";
 import { RentalCard } from "@/components/cards/RentalCard";
-import { StepCard } from "@/components/cards/StepCard";
+import { HowItWorksStepCard } from "@/components/cards/HowItWorksStepCard"; // Component for How It Works steps
 
 // Mock Data imports
 import { campsites } from "@/lib/data/campsites";
@@ -148,17 +148,17 @@ export default function Home() {
           <SectionHeader title="How It Works" center />
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <StepCard 
+            <HowItWorksStepCard 
               number="01" 
               title="Discover" 
               description="Browse our curated campsites, gear, and guided trips."
             />
-            <StepCard 
+            <HowItWorksStepCard 
               number="02" 
               title="Inquire" 
               description="Message us directly on WhatsApp for custom pricing and availability."
             />
-            <StepCard 
+            <HowItWorksStepCard 
               number="03" 
               title="Adventure" 
               description="Pack your bags and experience the magic of the Kenyan outdoors."
