@@ -4,10 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Search, ShoppingCart, User, Menu } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useInquiry } from "@/lib/context/InquiryContext";
 
 export function Navbar() {
   const [isImageError, setIsImageError] = useState(false);
+  const { totalItems } = useInquiry();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-surface-light/80 backdrop-blur-md border-b border-soft-sage">
@@ -46,8 +53,13 @@ export function Navbar() {
           <button className="text-text-dark hover:text-jungle-green hidden sm:block">
             <Search className="w-5 h-5" />
           </button>
-          <Link href="/cart" className="text-text-dark hover:text-jungle-green">
+          <Link href="/cart" className="text-text-dark hover:text-jungle-green relative">
             <ShoppingCart className="w-5 h-5" />
+            {mounted && totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-campfire-gold text-forest-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
           </Link>
           <Link href="/login" className="text-text-dark hover:text-jungle-green hidden sm:block">
             <User className="w-5 h-5" />

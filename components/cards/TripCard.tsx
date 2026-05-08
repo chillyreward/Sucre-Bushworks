@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Map } from "lucide-react";
+import { Clock, Map, ShoppingCart } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { Badge } from "@/components/ui/Badge";
+import { useInquiry } from "@/lib/context/InquiryContext";
 
 interface TripCardProps {
+  id: string;
   slug: string;
   name: string;
   duration: string;
@@ -13,7 +17,19 @@ interface TripCardProps {
   destinationType: string;
 }
 
-export function TripCard({ slug, name, duration, difficulty, image, destinationType }: TripCardProps) {
+export function TripCard({ id, slug, name, duration, difficulty, image, destinationType }: TripCardProps) {
+  const { addItem } = useInquiry();
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem({
+      id,
+      type: "trip",
+      name,
+      image,
+    });
+  };
+
   return (
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage flex flex-col h-full">
       <Link href={`/trips/${slug}`} className="block relative aspect-[4/3] overflow-hidden">
@@ -46,12 +62,21 @@ export function TripCard({ slug, name, duration, difficulty, image, destinationT
           </div>
         </div>
 
-        <WhatsAppButton 
-          text="Book via WhatsApp"
-          message={`Hello Sucre Bushworks, I would like to ask about this guided trip: ${name}.`}
-          variant="primary"
-          fullWidth
-        />
+        <div className="flex flex-col gap-2 mt-auto">
+          <button 
+            onClick={handleAdd}
+            className="w-full py-2.5 rounded-full border-2 border-jungle-green text-jungle-green font-medium hover:bg-jungle-green hover:text-white transition-colors flex items-center justify-center gap-2"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            Add to Inquiry Basket
+          </button>
+          <WhatsAppButton 
+            text="Book via WhatsApp"
+            message={`Hello Sucre Bushworks, I would like to ask about this guided experience: ${name}.`}
+            variant="primary"
+            fullWidth
+          />
+        </div>
       </div>
     </div>
   );

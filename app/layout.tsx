@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import "./globals.css";
+import { InquiryProvider } from "@/lib/context/InquiryContext";
 
 const dmSerif = DM_Serif_Display({
   weight: "400",
@@ -30,12 +31,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSerif.variable} ${manrope.variable} antialiased min-h-screen flex flex-col pb-16 md:pb-0`}>
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <MobileBottomNav />
+        <InquiryProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+          <MobileBottomNav />
+        </InquiryProvider>
       </body>
     </html>
   );

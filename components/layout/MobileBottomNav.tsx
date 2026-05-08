@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Compass, ShoppingBag, Calendar, User } from "lucide-react";
+import { Home, Compass, ShoppingBag, ShoppingCart, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function MobileBottomNav() {
@@ -10,14 +10,14 @@ export function MobileBottomNav() {
 
   const navItems = [
     { icon: Home, label: "Home", href: "/" },
-    { icon: Compass, label: "Explore", href: "/campsites" },
     { icon: ShoppingBag, label: "Shop", href: "/shop" },
-    { icon: Calendar, label: "Bookings", href: "/trips" },
-    { icon: User, label: "Profile", href: "/login" },
+    { icon: Compass, label: "Explore", href: "/campsites" },
+    { icon: ShoppingCart, label: "Basket", href: "/cart" },
+    { icon: User, label: "Account", href: "/login" },
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-soft-sage px-6 pb-safe pt-2">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-surface-light border-t border-soft-sage px-2 pb-safe pt-2">
       <div className="flex justify-between items-center h-16">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -28,7 +28,7 @@ export function MobileBottomNav() {
               key={item.label}
               href={item.href}
               className={cn(
-                "flex flex-col items-center justify-center gap-1 w-16",
+                "flex flex-col items-center justify-center gap-1 w-16 transition-colors",
                 isActive ? "text-jungle-green" : "text-outline hover:text-jungle-green"
               )}
             >

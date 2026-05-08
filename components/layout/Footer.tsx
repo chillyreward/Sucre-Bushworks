@@ -1,69 +1,67 @@
 import Link from "next/link";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-// removed lucide-react icons for social links
+import { Link as LinkIcon } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="bg-forest-black text-surface-light pt-16 pb-24 md:pb-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand Col */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:col-span-2">
             <div>
               <h3 className="font-serif text-2xl text-campfire-gold mb-1">Sucre Bushworks</h3>
               <p className="text-soft-sage text-sm uppercase tracking-wider">Fun in the Wild</p>
             </div>
-            <p className="text-surface-light/80 text-sm leading-relaxed max-w-xs">
-              Camping gear, campsite discovery, rentals, and trusted guides for outdoor adventures across Kenya.
+            <p className="text-surface-light/80 text-sm leading-relaxed max-w-sm">
+              Discover camping gear, scenic Kenyan campsites, and guided outdoor experiences. Plan your adventure with us directly on WhatsApp.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-surface-light/80 hover:text-campfire-gold">IG</a>
-              <a href="#" className="text-surface-light/80 hover:text-campfire-gold">FB</a>
+              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors">
+                <LinkIcon className="w-5 h-5" />
+              </Link>
             </div>
           </div>
 
           {/* Links Cols */}
           <div>
-            <h4 className="font-semibold text-lg mb-6">Shop</h4>
-            <ul className="space-y-4 text-surface-light/80">
-              <li><Link href="/shop" className="hover:text-campfire-gold">Camping Gear</Link></li>
-              <li><Link href="/shop" className="hover:text-campfire-gold">Tents</Link></li>
-              <li><Link href="/shop" className="hover:text-campfire-gold">Sleeping Bags</Link></li>
-              <li><Link href="/shop" className="hover:text-campfire-gold">Accessories</Link></li>
+            <h4 className="font-semibold text-lg mb-6">Shop Gear</h4>
+            <ul className="space-y-4 text-surface-light/80 text-sm">
+              <li><Link href="/shop" className="hover:text-campfire-gold transition-colors">Tents & Shelter</Link></li>
+              <li><Link href="/shop" className="hover:text-campfire-gold transition-colors">Sleeping Gear</Link></li>
+              <li><Link href="/shop" className="hover:text-campfire-gold transition-colors">Cooking Gear</Link></li>
+              <li><Link href="/shop" className="hover:text-campfire-gold transition-colors">Safety Gear</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-semibold text-lg mb-6">Explore</h4>
-            <ul className="space-y-4 text-surface-light/80">
-              <li><Link href="/campsites" className="hover:text-campfire-gold">Campsites</Link></li>
-              <li><Link href="/trips" className="hover:text-campfire-gold">Guided Trips</Link></li>
-              <li><Link href="/blog" className="hover:text-campfire-gold">Blog</Link></li>
-              <li><Link href="/about" className="hover:text-campfire-gold">About Us</Link></li>
+            <ul className="space-y-4 text-surface-light/80 text-sm">
+              <li><Link href="/campsites" className="hover:text-campfire-gold transition-colors">Campsites</Link></li>
+              <li><Link href="/trips" className="hover:text-campfire-gold transition-colors">Guided Trips</Link></li>
+              <li><Link href="/blog" className="hover:text-campfire-gold transition-colors">Blog</Link></li>
+              <li><Link href="/blog" className="hover:text-campfire-gold transition-colors">Outdoor Tips</Link></li>
             </ul>
           </div>
 
-          {/* Contact Col */}
-          <div className="space-y-6">
-            <h4 className="font-semibold text-lg mb-6">Contact Us</h4>
-            <p className="text-surface-light/80 text-sm">
-              Ready to plan your next trip? Reach out to us quickly on WhatsApp.
-            </p>
-            <p className="text-campfire-gold font-serif text-xl">+254 711 529 659</p>
-            <WhatsAppButton 
-              text="Chat with Us" 
-              message="Hello Sucre Bushworks, I have a general inquiry." 
-              variant="outline" 
-              className="w-full text-surface-light border-surface-light hover:bg-surface-light/10"
-            />
+          <div>
+            <h4 className="font-semibold text-lg mb-6">Company</h4>
+            <ul className="space-y-4 text-surface-light/80 text-sm">
+              <li><Link href="/about" className="hover:text-campfire-gold transition-colors">About</Link></li>
+              <li><Link href="/contact" className="hover:text-campfire-gold transition-colors">Contact</Link></li>
+              <li><Link href="/privacy" className="hover:text-campfire-gold transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-campfire-gold transition-colors">Terms & Conditions</Link></li>
+            </ul>
           </div>
         </div>
 
         <div className="border-t border-surface-light/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-surface-light/60">
           <p>&copy; {new Date().getFullYear()} Sucre Bushworks. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-campfire-gold">Privacy Policy</Link>
-            <Link href="#" className="hover:text-campfire-gold">Terms of Service</Link>
+          <div className="flex items-center gap-2">
+            <span>WhatsApp Planning:</span>
+            <a href="https://wa.me/254711529659?text=Hello%20Sucre%20Bushworks,%20I%20would%20like%20help%20planning%20a%20camping%20trip." target="_blank" rel="noreferrer" className="text-campfire-gold hover:underline font-medium">
+              +254 711 529 659
+            </a>
           </div>
         </div>
       </div>

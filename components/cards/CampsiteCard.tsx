@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ShieldCheck, TreePine } from "lucide-react";
+import { MapPin, ShieldCheck, TreePine, ShoppingCart } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { Badge } from "@/components/ui/Badge";
+import { useInquiry } from "@/lib/context/InquiryContext";
 
 interface CampsiteCardProps {
+  id: string;
   slug: string;
   name: string;
   region: string;
@@ -14,7 +18,19 @@ interface CampsiteCardProps {
   guideAvailable?: boolean;
 }
 
-export function CampsiteCard({ slug, name, region, environmentType, image, tags, guideAvailable = true }: CampsiteCardProps) {
+export function CampsiteCard({ id, slug, name, region, environmentType, image, tags, guideAvailable = true }: CampsiteCardProps) {
+  const { addItem } = useInquiry();
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem({
+      id,
+      type: "campsite",
+      name,
+      image,
+    });
+  };
+
   return (
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage flex flex-col h-full">
       <Link href={`/campsites/${slug}`} className="block relative aspect-[4/3] overflow-hidden">
@@ -55,12 +71,21 @@ export function CampsiteCard({ slug, name, region, environmentType, image, tags,
           </div>
         </div>
 
-        <WhatsAppButton 
-          text="Ask About This Campsite"
-          message={`Hello Sucre Bushworks, I would like to ask about this campsite: ${name}.`}
-          variant="outline"
-          fullWidth
-        />
+        <div className="flex flex-col gap-2 mt-auto">
+          <button 
+            onClick={handleAdd}
+            className="w-full py-2.5 rounded-full border-2 border-jungle-green text-jungle-green font-medium hover:bg-jungle-green hover:text-white transition-colors flex items-center justify-center gap-2"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            Add to Inquiry Basket
+          </button>
+          <WhatsAppButton 
+            text="Ask About This Campsite"
+            message={`Hello Sucre Bushworks, I would like to ask about this campsite: ${name}.`}
+            variant="outline"
+            fullWidth
+          />
+        </div>
       </div>
     </div>
   );

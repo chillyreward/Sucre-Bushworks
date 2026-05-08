@@ -1,46 +1,53 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { TripCard } from "@/components/cards/TripCard";
-import { trips } from "@/lib/data/trips";
+import { trips, TRIP_FILTERS } from "@/lib/data/trips";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import Link from "next/link";
 
 export default function TripsPage() {
-  const themes = Array.from(new Set(trips.map(t => t.theme)));
-
   return (
-    <div className="flex flex-col w-full bg-surface-light min-h-screen pb-20">
+    <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
       <PageHero 
         title="Guided Camping Trips" 
         description="Experience the wild with our expert guides leading the way. Safety and thrill guaranteed."
-        backgroundImage="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=1600&q=80"
+        backgroundImage="/images/hero/fun-in-the-wild.jpg"
       />
       
-      <div className="container mx-auto px-4 mt-10">
-        <div className="flex overflow-x-auto pb-4 gap-4 hide-scrollbar mb-8">
-          <button className="whitespace-nowrap px-6 py-2 rounded-full bg-jungle-green text-white font-medium text-sm">All Trips</button>
-          {themes.map((theme, idx) => (
-            <button key={idx} className="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-soft-sage text-text-dark font-medium text-sm hover:bg-soft-sage/50 transition-colors">
-              {theme}
-            </button>
-          ))}
-        </div>
+      <div className="container mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-10">
+        {/* Filters Sidebar */}
+        <aside className="w-full lg:w-72 shrink-0 space-y-8 bg-white p-6 rounded-3xl border border-soft-sage h-fit sticky top-28">
+          <h3 className="font-serif text-2xl text-forest-black mb-6">Explore By</h3>
+          
+          <div className="space-y-4">
+            {TRIP_FILTERS.map((filter, idx) => (
+              <label key={idx} className="flex items-center gap-3 text-sm text-text-dark cursor-pointer group">
+                <input type="checkbox" className="w-5 h-5 rounded border-soft-sage text-jungle-green focus:ring-jungle-green/50 cursor-pointer" /> 
+                <span className="group-hover:text-jungle-green transition-colors">{filter}</span>
+              </label>
+            ))}
+          </div>
+        </aside>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {trips.map((trip) => (
-            <TripCard key={trip.id} {...trip} />
-          ))}
+        <div className="flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {trips.map((trip) => (
+              // Note: trip.title is passed as name to match TripCardProps
+              <TripCard key={trip.id} {...trip} name={trip.title} duration={trip.durationLabel} />
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 mt-24">
+      <div className="container mx-auto px-4 mt-32">
         <div className="bg-forest-black text-surface-light rounded-3xl p-10 md:p-16 text-center shadow-card-hover relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-jungle-green rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-campfire-gold rounded-full blur-3xl opacity-20 translate-x-1/2 translate-y-1/2" />
+          <div className="absolute top-0 left-0 w-64 h-64 bg-jungle-green rounded-full blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-campfire-gold rounded-full blur-3xl opacity-10 translate-x-1/2 translate-y-1/2" />
           
           <div className="relative z-10 max-w-2xl mx-auto">
             <SectionHeader 
-              title="Custom Itinerary?" 
-              description="Want a tailored experience? Let's build a trip around your specific interests, dates, and group size."
+              title="Want a Custom Itinerary?" 
+              description="Looking for a tailored experience? Let's build a trip around your specific interests, dates, and group size."
               center
               className="mb-8"
             />
