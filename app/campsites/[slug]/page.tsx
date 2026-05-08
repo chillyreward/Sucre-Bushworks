@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { notFound } from "next/navigation";
 import { MapPin, ShieldCheck, TreePine, Check, AlertTriangle, Compass } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -24,7 +24,7 @@ export default async function CampsiteDetailPage({ params }: { params: Promise<{
     <div className="bg-white min-h-screen pb-24">
       {/* Hero */}
       <div className="relative w-full h-[60vh] min-h-[500px]">
-        <Image src={campsite.image} alt={campsite.name} fill className="object-cover" priority />
+        <SafeImage src={campsite.image} alt={campsite.name} fallbackName={campsite.name} fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-black via-forest-black/50 to-transparent" />
         <div className="absolute bottom-0 inset-x-0 p-8 lg:p-16">
           <div className="container mx-auto">
@@ -163,7 +163,7 @@ export default async function CampsiteDetailPage({ params }: { params: Promise<{
             {relatedCampsites.map((related) => (
               <Link href={`/campsites/${related.slug}`} key={related.id} className="group block">
                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-surface-light mb-6">
-                  <Image src={related.image} alt={related.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <SafeImage src={related.image} alt={related.name} fallbackName={related.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <h4 className="font-serif text-2xl text-text-dark group-hover:text-jungle-green transition-colors mb-2">{related.name}</h4>
                 <p className="text-outline line-clamp-2">{related.summary}</p>

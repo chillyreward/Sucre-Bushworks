@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/Button";
 import { ShoppingBag, Trash2, Map, Tent, Compass } from "lucide-react";
 import { useInquiry } from "@/lib/context/InquiryContext";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function CartPage() {
   const { items, removeItem, clearBasket } = useInquiry();
+  const [note, setNote] = useState("");
 
   const getIconForType = (type: string) => {
     switch (type) {
@@ -53,8 +55,11 @@ export default function CartPage() {
     );
   }
 
+  const customNoteBlock = note.trim() ? `\n\nNote to team:\n"${note.trim()}"` : "";
+  
   const whatsappMessage = `Hello Sucre Bushworks! I'm interested in the following items from my Inquiry Basket:\n\n` +
     items.map(item => `• [${item.type.toUpperCase()}] ${item.name}`).join('\n') +
+    customNoteBlock +
     `\n\nPlease let me know about availability, options, and next steps. Thank you!`;
 
   return (
@@ -81,7 +86,7 @@ export default function CartPage() {
             {items.map((item) => (
               <div key={`${item.type}-${item.id}`} className="bg-white border border-soft-sage p-4 pr-6 rounded-2xl flex items-center gap-6 group">
                 <div className="relative w-24 h-24 rounded-xl overflow-hidden bg-surface-light shrink-0">
-                  <Image src={item.image} alt={item.name} fill className="object-cover" />
+                  <SafeImage src={item.image} alt={item.name} fallbackName={item.name} fill className="object-cover" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-outline mb-1">
@@ -102,6 +107,16 @@ export default function CartPage() {
                 </button>
               </div>
             ))}
+          </div>
+
+          <div className="mt-8 bg-white p-6 rounded-3xl border border-soft-sage">
+            <h3 className="text-lg font-serif text-forest-black mb-3">Add a Note to Your Inquiry</h3>
+            <textarea 
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="e.g. We are a group of 4 looking to travel next weekend..."
+              className="w-full bg-surface-light border border-soft-sage rounded-2xl p-4 text-text-dark focus:outline-none focus:border-jungle-green transition-colors min-h-[120px] resize-y"
+            />
           </div>
         </div>
 

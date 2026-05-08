@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { notFound } from "next/navigation";
 import { blogPosts } from "@/lib/data/blog";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   return (
     <div className="bg-surface-light min-h-screen pb-24">
       <div className="relative w-full h-[60vh] min-h-[500px]">
-        <Image src={post.image} alt={post.title} fill className="object-cover" priority />
+        <SafeImage src={post.image} alt={post.title} fallbackName={post.title} fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-forest-black via-forest-black/50 to-transparent" />
         <div className="absolute bottom-0 inset-x-0 p-8 lg:p-16">
           <div className="container mx-auto max-w-4xl text-center">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -31,9 +31,10 @@ export default function Home() {
     <div className="flex flex-col w-full">
       {/* 1. Hero */}
       <section className="relative w-full min-h-[90vh] flex flex-col items-center justify-center pt-20 pb-32">
-        <Image
+        <SafeImage
           src="/images/hero/fun-in-the-wild.jpg"
           alt="Camping in Kenya"
+          fallbackName="Sucre Bushworks"
           fill
           className="object-cover"
           priority
@@ -91,10 +92,10 @@ export default function Home() {
           />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             {gearCategories.map((cat) => (
-              <Link href={`/shop?category=${cat.slug}`} key={cat.slug} className="group relative rounded-2xl overflow-hidden aspect-[4/5] block">
-                <Image src={cat.image} alt={cat.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Link href={`/shop?category=${cat.slug}`} key={cat.slug} className="group relative rounded-2xl overflow-hidden aspect-[4/5] block bg-surface-light">
+                <SafeImage src={cat.image} alt={cat.name} fallbackName={cat.name} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-forest-black/80 via-black/20 to-transparent group-hover:from-forest-black/90 transition-colors" />
-                <div className="absolute bottom-0 inset-x-0 p-6">
+                <div className="absolute bottom-0 inset-x-0 p-6 z-10">
                   <h4 className="text-surface-light font-serif text-2xl drop-shadow-md">{cat.name}</h4>
                   <p className="text-campfire-gold text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">Browse collection &rarr;</p>
                 </div>
@@ -183,7 +184,7 @@ export default function Home() {
             {blogPosts.slice(0, 3).map(post => (
               <Link href={`/blog/${post.slug}`} key={post.id} className="group block bg-surface-light rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover border border-soft-sage">
                 <div className="relative aspect-video overflow-hidden">
-                  <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <SafeImage src={post.image} alt={post.title} fallbackName={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-8">
                   <span className="text-xs font-semibold text-outline uppercase tracking-wider mb-3 block">{post.category}</span>
@@ -231,9 +232,10 @@ export default function Home() {
       {/* 8. Final CTA */}
       <section className="relative py-32 bg-forest-black overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <Image
+          <SafeImage
             src="/images/hero/fun-in-the-wild.jpg"
             alt="Camping night"
+            fallbackName=""
             fill
             className="object-cover"
           />

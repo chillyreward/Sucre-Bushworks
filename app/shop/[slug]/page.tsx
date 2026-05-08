@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { notFound } from "next/navigation";
 import { Check, Info, ShieldCheck } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -33,9 +33,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         {/* Image Gallery */}
         <div className="space-y-4">
           <div className="relative aspect-square rounded-3xl overflow-hidden bg-surface-light border border-soft-sage shadow-sm">
-            <Image
+            <SafeImage
               src={product.image}
               alt={product.name}
+              fallbackName={product.name}
               fill
               className="object-cover"
               priority
@@ -44,7 +45,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           {/* We only have one image right now, but this is where a gallery would go */}
           <div className="grid grid-cols-4 gap-4">
             <div className="relative aspect-square rounded-xl overflow-hidden bg-surface-light border-2 border-jungle-green opacity-100">
-              <Image src={product.image} alt={product.name} fill className="object-cover" />
+              <SafeImage src={product.image} alt={product.name} fallbackName="" fill className="object-cover" />
             </div>
             <div className="relative aspect-square rounded-xl overflow-hidden bg-soft-sage border border-soft-sage flex items-center justify-center text-outline text-sm">
               Image 2
@@ -151,7 +152,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             {relatedGear.map((item) => (
               <Link href={`/shop/${item.slug}`} key={item.id} className="group block">
                 <div className="relative aspect-square rounded-2xl overflow-hidden bg-surface-light mb-4">
-                  <Image src={item.image} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <SafeImage src={item.image} alt={item.name} fallbackName={item.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <h4 className="font-serif text-lg text-text-dark group-hover:text-jungle-green transition-colors line-clamp-1">{item.name}</h4>
                 <p className="text-sm text-outline uppercase tracking-wider mt-1">{item.category}</p>

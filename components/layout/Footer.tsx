@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { Link as LinkIcon } from "lucide-react";
+import Image from "next/image";
+import { Link as LinkIcon, Globe, MessageCircle } from "lucide-react";
 
 export function Footer() {
   return (
@@ -9,18 +9,22 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand Col */}
           <div className="space-y-6 lg:col-span-2">
-            <div>
-              <h3 className="font-serif text-2xl text-campfire-gold mb-1">Sucre Bushworks</h3>
-              <p className="text-soft-sage text-sm uppercase tracking-wider">Fun in the Wild</p>
+            <div className="flex items-center gap-4">
+              <Image 
+                src="/images/sucre-bushworks-logo.png" 
+                alt="Sucre Bushworks Logo" 
+                width={56} 
+                height={56} 
+                className="object-contain"
+              />
+              <div>
+                <h3 className="font-serif text-2xl text-campfire-gold mb-1">Sucre Bushworks</h3>
+                <p className="text-soft-sage text-sm uppercase tracking-wider">Fun in the Wild</p>
+              </div>
             </div>
             <p className="text-surface-light/80 text-sm leading-relaxed max-w-sm">
               Discover camping gear, scenic Kenyan campsites, and guided outdoor experiences. Plan your adventure with us directly on WhatsApp.
             </p>
-            <div className="flex gap-4">
-              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors">
-                <LinkIcon className="w-5 h-5" />
-              </Link>
-            </div>
           </div>
 
           {/* Links Cols */}
@@ -55,13 +59,31 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-surface-light/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-surface-light/60">
+        <div className="border-t border-surface-light/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-sm text-surface-light/60">
           <p>&copy; {new Date().getFullYear()} Sucre Bushworks. All rights reserved.</p>
-          <div className="flex items-center gap-2">
-            <span>WhatsApp Planning:</span>
-            <a href="https://wa.me/254711529659?text=Hello%20Sucre%20Bushworks,%20I%20would%20like%20help%20planning%20a%20camping%20trip." target="_blank" rel="noreferrer" className="text-campfire-gold hover:underline font-medium">
-              +254 711 529 659
-            </a>
+          
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="flex items-center gap-2">
+              <span>WhatsApp:</span>
+              <a href="https://wa.me/254711529659?text=Hello%20Sucre%20Bushworks,%20I%20would%20like%20help%20planning%20a%20camping%20trip." target="_blank" rel="noreferrer" className="text-campfire-gold hover:underline font-medium">
+                +254 711 529 659
+              </a>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Social 1">
+                <Globe className="w-5 h-5" />
+              </Link>
+              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Social 2">
+                <MessageCircle className="w-5 h-5" />
+              </Link>
+              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Social 3">
+                <LinkIcon className="w-5 h-5" />
+              </Link>
+              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Social 4">
+                <Globe className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

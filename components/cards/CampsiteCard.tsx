@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import Link from "next/link";
 import { MapPin, ShieldCheck, TreePine, ShoppingCart } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
@@ -34,9 +34,10 @@ export function CampsiteCard({ id, slug, name, region, environmentType, image, t
   return (
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage flex flex-col h-full">
       <Link href={`/campsites/${slug}`} className="block relative aspect-[4/3] overflow-hidden">
-        <Image
+        <SafeImage
           src={image}
           alt={name}
+          fallbackName={name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />

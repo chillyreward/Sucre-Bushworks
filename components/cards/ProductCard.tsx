@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import Link from "next/link";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { useInquiry } from "@/lib/context/InquiryContext";
@@ -34,9 +34,10 @@ export function ProductCard({ id, slug, name, image, category, summary }: Produc
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage flex flex-col h-full">
       <Link href={`/shop/${slug}`} className="block relative aspect-square overflow-hidden bg-surface-light">
         <div className="absolute inset-0 bg-jungle-green/5" />
-        <Image
+        <SafeImage
           src={image}
           alt={name}
+          fallbackName={name}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
