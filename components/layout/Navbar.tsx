@@ -38,7 +38,6 @@ export function Navbar() {
           <Link href="/shop" className="text-text-dark hover:text-jungle-green font-medium">Shop Gear</Link>
           <Link href="/campsites" className="text-text-dark hover:text-jungle-green font-medium">Campsites</Link>
           <Link href="/trips" className="text-text-dark hover:text-jungle-green font-medium">Guided Trips</Link>
-          <Link href="/rentals" className="text-text-dark hover:text-jungle-green font-medium">Rentals</Link>
           <Link href="/about" className="text-text-dark hover:text-jungle-green font-medium">About</Link>
           <Link href="/contact" className="text-text-dark hover:text-jungle-green font-medium">Contact</Link>
         </nav>

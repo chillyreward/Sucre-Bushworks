@@ -5,6 +5,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 export default function TripsPage() {
+  const themes = Array.from(new Set(trips.map(t => t.theme)));
+
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-20">
       <PageHero 
@@ -13,7 +15,16 @@ export default function TripsPage() {
         backgroundImage="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=1600&q=80"
       />
       
-      <div className="container mx-auto px-4 mt-16">
+      <div className="container mx-auto px-4 mt-10">
+        <div className="flex overflow-x-auto pb-4 gap-4 hide-scrollbar mb-8">
+          <button className="whitespace-nowrap px-6 py-2 rounded-full bg-jungle-green text-white font-medium text-sm">All Trips</button>
+          {themes.map((theme, idx) => (
+            <button key={idx} className="whitespace-nowrap px-6 py-2 rounded-full bg-white border border-soft-sage text-text-dark font-medium text-sm hover:bg-soft-sage/50 transition-colors">
+              {theme}
+            </button>
+          ))}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {trips.map((trip) => (
             <TripCard key={trip.id} {...trip} />

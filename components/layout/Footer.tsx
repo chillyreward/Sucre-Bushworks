@@ -38,8 +38,8 @@ export function Footer() {
             <ul className="space-y-4 text-surface-light/80">
               <li><Link href="/campsites" className="hover:text-campfire-gold">Campsites</Link></li>
               <li><Link href="/trips" className="hover:text-campfire-gold">Guided Trips</Link></li>
-              <li><Link href="/rentals" className="hover:text-campfire-gold">Gear Rentals</Link></li>
-              <li><Link href="/guides" className="hover:text-campfire-gold">Meet the Guides</Link></li>
+              <li><Link href="/blog" className="hover:text-campfire-gold">Blog</Link></li>
+              <li><Link href="/about" className="hover:text-campfire-gold">About Us</Link></li>
             </ul>
           </div>
 
@@ -49,6 +49,7 @@ export function Footer() {
             <p className="text-surface-light/80 text-sm">
               Ready to plan your next trip? Reach out to us quickly on WhatsApp.
             </p>
+            <p className="text-campfire-gold font-serif text-xl">+254 711 529 659</p>
             <WhatsAppButton 
               text="Chat with Us" 
               message="Hello Sucre Bushworks, I have a general inquiry." 

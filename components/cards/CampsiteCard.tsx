@@ -7,13 +7,14 @@ import { Badge } from "@/components/ui/Badge";
 interface CampsiteCardProps {
   slug: string;
   name: string;
-  location: string;
+  region: string;
+  environmentType: string;
   image: string;
   tags: string[];
   guideAvailable?: boolean;
 }
 
-export function CampsiteCard({ slug, name, location, image, tags, guideAvailable = true }: CampsiteCardProps) {
+export function CampsiteCard({ slug, name, region, environmentType, image, tags, guideAvailable = true }: CampsiteCardProps) {
   return (
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage flex flex-col h-full">
       <Link href={`/campsites/${slug}`} className="block relative aspect-[4/3] overflow-hidden">
@@ -38,7 +39,7 @@ export function CampsiteCard({ slug, name, location, image, tags, guideAvailable
         </Link>
         <div className="flex items-center text-outline text-sm mb-4">
           <MapPin className="w-4 h-4 mr-1" />
-          {location}
+          {region}
         </div>
         
         <div className="space-y-2 mb-6 flex-1">
@@ -50,13 +51,13 @@ export function CampsiteCard({ slug, name, location, image, tags, guideAvailable
           )}
           <div className="flex items-center text-sm text-text-dark">
             <TreePine className="w-4 h-4 mr-2 text-moss-green" />
-            Scenic Location
+            {environmentType}
           </div>
         </div>
 
         <WhatsAppButton 
-          text="Inquire on WhatsApp"
-          message={`Hello Sucre Bushworks, I would like to ask about the ${name} campsite.`}
+          text="Ask About This Campsite"
+          message={`Hello Sucre Bushworks, I would like to ask about this campsite: ${name}.`}
           variant="outline"
           fullWidth
         />

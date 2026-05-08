@@ -1,18 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 interface ProductCardProps {
   id: string;
   slug: string;
   name: string;
-  price: number;
   image: string;
   category: string;
 }
 
-export function ProductCard({ slug, name, price, image, category }: ProductCardProps) {
+export function ProductCard({ slug, name, image, category }: ProductCardProps) {
   return (
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage">
       <Link href={`/shop/${slug}`} className="block relative aspect-square overflow-hidden bg-surface-light">
@@ -29,11 +27,13 @@ export function ProductCard({ slug, name, price, image, category }: ProductCardP
         <Link href={`/shop/${slug}`}>
           <h3 className="text-lg font-serif text-text-dark mb-3 line-clamp-1 group-hover:text-jungle-green transition-colors">{name}</h3>
         </Link>
-        <div className="flex items-center justify-between mt-4">
-          <span className="text-xl font-bold text-forest-black">KSh {price.toLocaleString()}</span>
-          <Button size="sm" variant="secondary" className="rounded-xl h-10 w-10 p-0">
-            <ShoppingCart className="w-4 h-4" />
-          </Button>
+        <div className="mt-4">
+          <WhatsAppButton 
+            text="Ask on WhatsApp"
+            message={`Hello Sucre Bushworks, I would like to ask about this item: ${name}`}
+            variant="outline"
+            fullWidth
+          />
         </div>
       </div>
     </div>

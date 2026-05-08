@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Map, Users } from "lucide-react";
+import { Clock, Map } from "lucide-react";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { Badge } from "@/components/ui/Badge";
 
@@ -10,13 +10,13 @@ interface TripCardProps {
   duration: string;
   difficulty: string;
   image: string;
-  groupSize: string;
+  destinationType: string;
 }
 
-export function TripCard({ slug, name, duration, difficulty, image, groupSize }: TripCardProps) {
+export function TripCard({ slug, name, duration, difficulty, image, destinationType }: TripCardProps) {
   return (
     <div className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover transition-all duration-300 border border-soft-sage flex flex-col h-full">
-      <Link href={`/trips`} className="block relative aspect-[4/3] overflow-hidden">
+      <Link href={`/trips/${slug}`} className="block relative aspect-[4/3] overflow-hidden">
         <Image
           src={image}
           alt={name}
@@ -32,7 +32,7 @@ export function TripCard({ slug, name, duration, difficulty, image, groupSize }:
       <div className="p-6 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-4">
           <Badge variant={difficulty === "Easy" ? "success" : "warning"}>{difficulty}</Badge>
-          <Badge variant="default">Guided Trip</Badge>
+          <Badge variant="default">Guided</Badge>
         </div>
         
         <div className="grid grid-cols-2 gap-4 mb-6 flex-1 text-sm text-text-dark">
@@ -41,18 +41,14 @@ export function TripCard({ slug, name, duration, difficulty, image, groupSize }:
             {duration}
           </div>
           <div className="flex items-center">
-            <Users className="w-4 h-4 mr-2 text-outline" />
-            {groupSize}
-          </div>
-          <div className="flex items-center col-span-2">
             <Map className="w-4 h-4 mr-2 text-outline" />
-            Flexible Custom Itinerary
+            {destinationType}
           </div>
         </div>
 
         <WhatsAppButton 
-          text="Book on WhatsApp"
-          message={`Hello Sucre Bushworks, I would like to book or ask about the ${name} guided trip.`}
+          text="Book via WhatsApp"
+          message={`Hello Sucre Bushworks, I would like to ask about this guided trip: ${name}.`}
           variant="primary"
           fullWidth
         />
