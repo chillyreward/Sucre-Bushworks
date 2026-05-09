@@ -1,21 +1,33 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { CampsiteCard } from "@/components/cards/CampsiteCard";
 import { campsites, CAMPSITE_FILTERS } from "@/lib/data/campsites";
+import { SearchBar } from "@/components/ui/SearchBar";
 import Link from "next/link";
 
 export default async function CampsitesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ region?: string }>;
+  searchParams: Promise<{ region?: string; query?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
   const activeRegion = resolvedSearchParams.region;
+  const searchQuery = resolvedSearchParams.query?.toLowerCase();
   
   const regions = Array.from(new Set(campsites.map(c => c.region)));
 
-  const filteredCampsites = activeRegion && activeRegion !== "All Regions"
+  let filteredCampsites = activeRegion && activeRegion !== "All Regions"
     ? campsites.filter(c => c.region === activeRegion)
     : campsites;
+
+  if (searchQuery) {
+    filteredCampsites = filteredCampsites.filter(
+      (c) => 
+        c.name.toLowerCase().includes(searchQuery) || 
+        c.summary.toLowerCase().includes(searchQuery) ||
+        c.overview.toLowerCase().includes(searchQuery) ||
+        c.region.toLowerCase().includes(searchQuery)
+    );
+  }
 
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
@@ -30,7 +42,12 @@ export default async function CampsitesPage({
         <aside className="w-full lg:w-72 shrink-0 space-y-8 bg-white p-6 rounded-3xl border border-soft-sage h-fit sticky top-28">
           <h3 className="font-serif text-2xl text-forest-black mb-6">Filters</h3>
           
-          <div className="space-y-3">
+          <div className="space-y-6">
+            <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Search</h4>
+            <SearchBar placeholder="Search sites..." />
+          </div>
+
+          <div className="space-y-3 pt-6 border-t border-soft-sage">
             <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Region</h4>
             <div className="relative">
               <select 

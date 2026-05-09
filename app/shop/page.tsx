@@ -8,14 +8,28 @@ import Link from "next/link";
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; query?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
   const activeCategory = resolvedSearchParams.category;
+  const searchQuery = resolvedSearchParams.query?.toLowerCase();
+  
+  let filteredGear = gear;
 
-  const filteredGear = activeCategory
-    ? gear.filter((item) => item.category.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-") === activeCategory)
-    : gear;
+  if (activeCategory) {
+    filteredGear = filteredGear.filter(
+      (item) => item.category.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-") === activeCategory
+    );
+  }
+
+  if (searchQuery) {
+    filteredGear = filteredGear.filter(
+      (item) => 
+        item.name.toLowerCase().includes(searchQuery) || 
+        item.summary.toLowerCase().includes(searchQuery) ||
+        item.overview.toLowerCase().includes(searchQuery)
+    );
+  }
 
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">

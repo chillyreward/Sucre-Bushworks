@@ -2,20 +2,31 @@ import { PageHero } from "@/components/ui/PageHero";
 import { TripCard } from "@/components/cards/TripCard";
 import { trips, TRIP_FILTERS } from "@/lib/data/trips";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SearchBar } from "@/components/ui/SearchBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import Link from "next/link";
 
 export default async function TripsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ difficulty?: string }>;
+  searchParams: Promise<{ difficulty?: string; query?: string }>;
 }) {
   const resolvedSearchParams = await searchParams;
   const activeDifficulty = resolvedSearchParams.difficulty;
+  const searchQuery = resolvedSearchParams.query?.toLowerCase();
 
-  const filteredTrips = activeDifficulty && activeDifficulty !== "All"
+  let filteredTrips = activeDifficulty && activeDifficulty !== "All"
     ? trips.filter(t => t.difficulty === activeDifficulty)
     : trips;
+
+  if (searchQuery) {
+    filteredTrips = filteredTrips.filter(
+      (t) => 
+        t.title.toLowerCase().includes(searchQuery) || 
+        t.summary.toLowerCase().includes(searchQuery) ||
+        t.destinationType.toLowerCase().includes(searchQuery)
+    );
+  }
 
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
@@ -31,6 +42,11 @@ export default async function TripsPage({
           <h3 className="font-serif text-2xl text-forest-black mb-6">Explore By</h3>
           
           <div className="space-y-6">
+            <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Search</h4>
+            <SearchBar placeholder="Search trips..." />
+          </div>
+
+          <div className="space-y-6 pt-6 border-t border-soft-sage">
             <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Difficulty</h4>
             <ul className="space-y-2">
               {["All", "Easy", "Moderate", "Challenging"].map((diff) => (
