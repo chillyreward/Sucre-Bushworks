@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Link as LinkIcon, Globe, MessageCircle, Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
+import { Link as LinkIcon, Globe, MessageCircle, Camera, Send, Share2 } from "lucide-react";
 
 export function Footer() {
   return (
@@ -72,16 +72,16 @@ export function Footer() {
             
             <div className="flex items-center gap-4">
               <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Instagram">
-                <Instagram className="w-5 h-5" />
+                <Camera className="w-5 h-5" />
               </Link>
               <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Twitter">
-                <Twitter className="w-5 h-5" />
+                <Send className="w-5 h-5" />
               </Link>
               <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Facebook">
-                <Facebook className="w-5 h-5" />
+                <Share2 className="w-5 h-5" />
               </Link>
               <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="LinkedIn">
-                <Linkedin className="w-5 h-5" />
+                <Globe className="w-5 h-5" />
               </Link>
             </div>
           </div>
