@@ -1,6 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Link as LinkIcon, Globe, MessageCircle, Camera, Send, Share2 } from "lucide-react";
+import { Globe, MessageCircle, Camera, Music2, Share2, Mail } from "lucide-react";
+
+const socialLinks = [
+  { icon: Camera, href: "/coming-soon", label: "Instagram" },
+  { icon: Music2, href: "/coming-soon", label: "TikTok" },
+  { icon: Share2, href: "/coming-soon", label: "Share" },
+  { icon: Mail, href: "/coming-soon", label: "Email" },
+  { icon: Globe, href: "/coming-soon", label: "Website" },
+];
 
 export function Footer() {
   return (
@@ -71,18 +79,14 @@ export function Footer() {
             </div>
             
             <div className="flex items-center gap-4">
-              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Instagram">
-                <Camera className="w-5 h-5" />
-              </Link>
-              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Twitter">
-                <Send className="w-5 h-5" />
-              </Link>
-              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="Facebook">
-                <Share2 className="w-5 h-5" />
-              </Link>
-              <Link href="/coming-soon" className="text-surface-light/80 hover:text-campfire-gold transition-colors" title="LinkedIn">
-                <Globe className="w-5 h-5" />
-              </Link>
+              {socialLinks.map((link, idx) => {
+                const Icon = link.icon;
+                return (
+                  <Link key={idx} href={link.href} className="text-surface-light/80 hover:text-campfire-gold transition-colors" title={link.label}>
+                    <Icon className="w-5 h-5" />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -90,3 +94,4 @@ export function Footer() {
     </footer>
   );
 }
+
