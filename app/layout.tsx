@@ -21,6 +21,11 @@ import { MobileBottomNav } from "@/components/layout/MobileBottomNav";
 export const metadata: Metadata = {
   title: "Sucre Bushworks | Fun in the Wild",
   description: "Shop camping gear, discover campsites in Kenya, and book guided camping trips.",
+  icons: {
+    icon: "/images/sucre-bushworks-logo.png",
+    shortcut: "/images/sucre-bushworks-logo.png",
+    apple: "/images/sucre-bushworks-logo.png",
+  },
 };
 
 export default function RootLayout({

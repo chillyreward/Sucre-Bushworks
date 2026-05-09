@@ -18,26 +18,26 @@ export function Navbar() {
 
   return (
     <header className="sticky top-4 z-50 w-full px-4 mb-4">
-      <div className="max-w-6xl mx-auto bg-white/90 backdrop-blur-md border border-soft-sage shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full h-16 flex items-center justify-between px-6 transition-all">
+      <div className="max-w-6xl mx-auto bg-white/90 backdrop-blur-md border border-soft-sage shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-full h-20 flex items-center justify-between px-8 transition-all">
         
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-3 shrink-0">
+        <Link href="/" className="flex items-center gap-4 shrink-0">
           {!isImageError ? (
             <Image
               src="/images/sucre-bushworks-logo.png"
               alt="Sucre Bushworks Logo"
-              width={40}
-              height={40}
-              className="object-contain"
+              width={64}
+              height={64}
+              className="h-14 w-14 md:h-16 md:w-16 object-contain"
               onError={() => setIsImageError(true)}
               priority
             />
           ) : (
-            <div className="w-10 h-10 bg-jungle-green rounded-full flex items-center justify-center text-campfire-gold font-serif text-lg">
+            <div className="w-14 h-14 bg-jungle-green rounded-full flex items-center justify-center text-campfire-gold font-serif text-xl">
               SB
             </div>
           )}
-          <span className="font-serif text-xl text-forest-black hidden sm:block whitespace-nowrap">
+          <span className="font-serif text-2xl text-forest-black hidden sm:block whitespace-nowrap">
             Sucre Bushworks
           </span>
         </Link>
