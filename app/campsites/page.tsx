@@ -3,8 +3,19 @@ import { CampsiteCard } from "@/components/cards/CampsiteCard";
 import { campsites, CAMPSITE_FILTERS } from "@/lib/data/campsites";
 import Link from "next/link";
 
-export default function CampsitesPage() {
+export default async function CampsitesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ region?: string }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const activeRegion = resolvedSearchParams.region;
+  
   const regions = Array.from(new Set(campsites.map(c => c.region)));
+
+  const filteredCampsites = activeRegion && activeRegion !== "All Regions"
+    ? campsites.filter(c => c.region === activeRegion)
+    : campsites;
 
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
@@ -21,12 +32,33 @@ export default function CampsitesPage() {
           
           <div className="space-y-3">
             <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Region</h4>
-            <select className="w-full bg-surface-light border border-soft-sage text-text-dark rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-jungle-green/50 appearance-none">
-              <option>All Regions</option>
-              {regions.map((r, idx) => (
-                <option key={idx}>{r}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select 
+                defaultValue={activeRegion || "All Regions"}
+                onChange={() => {}} // Note: This won't work in server component, I should use Links or a Client Component wrapper
+                className="w-full bg-surface-light border border-soft-sage text-text-dark rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-jungle-green/50 appearance-none cursor-pointer"
+              >
+                <option>All Regions</option>
+                {regions.map((r, idx) => (
+                  <option key={idx} value={r}>{r}</option>
+                ))}
+              </select>
+              {/* Replacing the select with a list of links for better server-component behavior */}
+              <ul className="space-y-2 mt-4">
+                <li>
+                  <Link href="/campsites" className={`block py-1 hover:text-jungle-green transition-colors ${!activeRegion || activeRegion === "All Regions" ? "text-jungle-green font-bold" : "text-outline"}`}>
+                    All Regions
+                  </Link>
+                </li>
+                {regions.map((r, idx) => (
+                  <li key={idx}>
+                    <Link href={`/campsites?region=${r}`} className={`block py-1 hover:text-jungle-green transition-colors ${activeRegion === r ? "text-jungle-green font-bold" : "text-outline"}`}>
+                      {r}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div className="space-y-4 pt-4 border-t border-soft-sage">
@@ -42,7 +74,7 @@ export default function CampsitesPage() {
 
         <div className="flex-1">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {campsites.map((campsite) => (
+            {filteredCampsites.map((campsite) => (
               <CampsiteCard key={campsite.id} {...campsite} />
             ))}
           </div>

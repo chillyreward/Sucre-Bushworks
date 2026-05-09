@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { SafeImage } from "@/components/ui/SafeImage";
 
 interface PageHeroProps {
   title: string;
@@ -11,13 +12,22 @@ export function PageHero({ title, description, backgroundImage, className }: Pag
   return (
     <div
       className={cn(
-        "relative w-full h-[40vh] min-h-[300px] flex items-center justify-center text-center px-4 overflow-hidden",
+        "relative w-full h-[50vh] min-h-[400px] flex items-center justify-center text-center px-4 overflow-hidden",
         className
       )}
     >
       <div className="absolute inset-0 bg-forest-black">
-        {/* Placeholder for background image. Next.js Image would go here if backgroundImage is provided */}
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-black/80 to-transparent" />
+        {backgroundImage && (
+          <SafeImage 
+            src={backgroundImage} 
+            alt={title} 
+            fallbackName={title} 
+            fill 
+            className="object-cover opacity-60" 
+            priority
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-black via-forest-black/40 to-transparent" />
       </div>
       
       <div className="relative z-10 max-w-3xl mx-auto space-y-4">

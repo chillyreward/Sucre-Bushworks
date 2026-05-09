@@ -40,7 +40,7 @@ Don't overpack clothes, but do bring layers. The Kenyan weather can be unpredict
     slug: "best-campsites-near-nairobi",
     title: "Best Campsites Near Nairobi",
     category: "Destinations",
-    image: "/images/campsites/nairobi-national-park-camp.jpg", // re-using image
+    image: "/images/blog/best-campsites-near-nairobi.jpg",
     excerpt: "Don't want to drive for hours? Discover the best campsites located just a short drive from the capital.",
     content: `
 ## Quick Escapes
@@ -62,7 +62,7 @@ These spots are perfect for our "Weekend Near Nairobi Experience" trips.
     slug: "camping-gear-checklist-for-beginners",
     title: "Camping Gear Checklist for Beginners",
     category: "Gear Tips",
-    image: "/images/gear/bush-cooking-kit.jpg", // re-using image
+    image: "/images/blog/how-to-choose-camping-gear.jpg",
     excerpt: "A simple, printable checklist to ensure you never forget the essentials when heading into the bush.",
     content: `
 ## Never Forget the Matches
@@ -114,7 +114,7 @@ If you don't want to plan at all, check out our guided Weekend Experiences.
     slug: "safety-tips-for-camping-in-kenya",
     title: "Safety Tips for Camping in Kenya",
     category: "Safety",
-    image: "/images/gear/first-aid-outdoor-kit.jpg", // re-using image
+    image: "/images/blog/camping-safety-tips-kenya.jpg",
     excerpt: "From wild animals to sudden weather changes, here is how to stay safe while camping in Kenya.",
     content: `
 ## Respect the Wild

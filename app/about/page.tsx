@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 export default function AboutPage() {
@@ -15,7 +15,7 @@ export default function AboutPage() {
       <div className="container mx-auto px-4 mt-16 max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
           <div className="relative aspect-square rounded-3xl overflow-hidden shadow-sm">
-            <Image src="/images/hero/camping-gear.jpg" alt="Camping Gear in Kenya" fill className="object-cover" />
+            <SafeImage src="/images/about/our-story.jpg" alt="Our Story" fallbackName="Our Story" fill className="object-cover" />
           </div>
           <div className="space-y-6">
             <h2 className="font-serif text-4xl text-forest-black">Our Story</h2>
@@ -39,7 +39,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="order-1 md:order-2 relative aspect-square rounded-3xl overflow-hidden shadow-sm">
-            <Image src="/images/hero/mount-kenya.jpg" alt="Mount Kenya" fill className="object-cover" />
+            <SafeImage src="/images/about/our-mission.jpg" alt="Our Mission" fallbackName="Our Mission" fill className="object-cover" />
           </div>
         </div>
 

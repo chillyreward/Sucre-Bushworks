@@ -9,7 +9,7 @@ export default function ContactPage() {
       <PageHero 
         title="Contact Us" 
         description="We're here to help you plan your next adventure in the wild."
-        backgroundImage="/images/hero/fun-in-the-wild.jpg"
+        backgroundImage="/images/about/contact-visual.jpg"
       />
       
       <div className="container mx-auto px-4 mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl">

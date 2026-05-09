@@ -5,7 +5,18 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import Link from "next/link";
 
-export default function TripsPage() {
+export default async function TripsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ difficulty?: string }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const activeDifficulty = resolvedSearchParams.difficulty;
+
+  const filteredTrips = activeDifficulty && activeDifficulty !== "All"
+    ? trips.filter(t => t.difficulty === activeDifficulty)
+    : trips;
+
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
       <PageHero 
@@ -19,8 +30,25 @@ export default function TripsPage() {
         <aside className="w-full lg:w-72 shrink-0 space-y-8 bg-white p-6 rounded-3xl border border-soft-sage h-fit sticky top-28">
           <h3 className="font-serif text-2xl text-forest-black mb-6">Explore By</h3>
           
-          <div className="space-y-4">
-            {TRIP_FILTERS.map((filter, idx) => (
+          <div className="space-y-6">
+            <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Difficulty</h4>
+            <ul className="space-y-2">
+              {["All", "Easy", "Moderate", "Challenging"].map((diff) => (
+                <li key={diff}>
+                  <Link 
+                    href={diff === "All" ? "/trips" : `/trips?difficulty=${diff}`}
+                    className={`block py-1 hover:text-jungle-green transition-colors ${(!activeDifficulty && diff === "All") || activeDifficulty === diff ? "text-jungle-green font-bold" : "text-outline"}`}
+                  >
+                    {diff}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4 pt-6 border-t border-soft-sage">
+            <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Tags</h4>
+            {TRIP_FILTERS.slice(0, 8).map((filter, idx) => (
               <label key={idx} className="flex items-center gap-3 text-sm text-text-dark cursor-pointer group">
                 <input type="checkbox" className="w-5 h-5 rounded border-soft-sage text-jungle-green focus:ring-jungle-green/50 cursor-pointer" /> 
                 <span className="group-hover:text-jungle-green transition-colors">{filter}</span>
@@ -31,7 +59,7 @@ export default function TripsPage() {
 
         <div className="flex-1">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {trips.map((trip) => (
+            {filteredTrips.map((trip) => (
               // Note: trip.title is passed as name to match TripCardProps
               <TripCard key={trip.id} {...trip} name={trip.title} duration={trip.durationLabel} />
             ))}

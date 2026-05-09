@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/ui/PageHero";
 import Link from "next/link";
-import Image from "next/image";
+import { SafeImage } from "@/components/ui/SafeImage";
 import { blogPosts } from "@/lib/data/blog";
 
 export default function BlogPage() {
@@ -17,7 +17,7 @@ export default function BlogPage() {
           {blogPosts.map(post => (
             <Link href={`/blog/${post.slug}`} key={post.id} className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-card-hover border border-soft-sage transition-all duration-300">
               <div className="relative aspect-[4/3] overflow-hidden">
-                <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                <SafeImage src={post.image} alt={post.title} fallbackName={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-8 flex flex-col flex-1">
                 <span className="text-xs font-semibold text-outline uppercase tracking-wider mb-3">{post.category}</span>
