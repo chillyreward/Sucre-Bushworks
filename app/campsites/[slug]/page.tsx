@@ -8,11 +8,11 @@ import { AddCampsiteToBasketButton } from "@/components/ui/AddCampsiteToBasketBu
 import Link from "next/link";
 
 export default async function CampsiteDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const resolvedParams = await params;
+  const resolvedParams = (await params) || {};
   const campsite = campsites.find((c) => c.slug === resolvedParams.slug);
 
   if (!campsite) {
-    notFound();
+    return notFound();
   }
 
   // Find some related campsites in the same region

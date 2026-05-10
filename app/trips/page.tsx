@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SearchBar } from "@/components/ui/SearchBar";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function TripsPage({
   searchParams,
@@ -31,9 +32,9 @@ export default async function TripsPage({
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
       <PageHero 
-        title="Guided Camping Trips" 
-        description="Experience the wild with our expert guides leading the way. Safety and thrill guaranteed."
-        backgroundImage="/images/hero/fun-in-the-wild.jpg"
+        title="Guided Wild Experiences" 
+        description="Expert-led expeditions into Kenya's most iconic landscapes. We handle the logistics, you live the adventure."
+        backgroundImage="/images/hero/guided-trips.jpg"
       />
       
       <div className="container mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-10">
@@ -43,7 +44,9 @@ export default async function TripsPage({
           
           <div className="space-y-6">
             <h4 className="font-semibold text-text-dark text-sm uppercase tracking-wider mb-2">Search</h4>
-            <SearchBar placeholder="Search trips..." />
+            <Suspense fallback={<div className="h-10 w-full bg-surface-light animate-pulse rounded-xl" />}>
+              <SearchBar placeholder="Search trips..." />
+            </Suspense>
           </div>
 
           <div className="space-y-6 pt-6 border-t border-soft-sage">

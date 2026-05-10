@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { gear, GEAR_CATEGORIES } from "@/lib/data/gear";
 import { SearchBar } from "@/components/ui/SearchBar";
 import Link from "next/link";
+import { Suspense } from "react";
 
 // Server Component
 export default async function ShopPage({
@@ -34,8 +35,9 @@ export default async function ShopPage({
   return (
     <div className="flex flex-col w-full bg-surface-light min-h-screen pb-24">
       <PageHero 
-        title="Shop Camping Gear" 
-        description="Premium equipment to elevate your outdoor experience in Kenya."
+        title="Safari-Ready Gear" 
+        description="Premium, field-tested equipment curated for the Kenyan wild. From canvas tents to trail-ready packs."
+        backgroundImage="/images/hero/shop-gear.jpg"
       />
       
       <div className="container mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-10">
@@ -43,7 +45,9 @@ export default async function ShopPage({
         <div className="w-full lg:w-72 flex-shrink-0 space-y-8">
           <div className="bg-white p-6 rounded-3xl border border-soft-sage sticky top-28">
             <h3 className="font-serif text-2xl text-text-dark mb-6">Search Gear</h3>
-            <SearchBar placeholder="Search tents, bags..." />
+            <Suspense fallback={<div className="h-10 w-full bg-surface-light animate-pulse rounded-xl" />}>
+              <SearchBar placeholder="Search tents, bags..." />
+            </Suspense>
             
             <h3 className="font-serif text-2xl text-text-dark mt-8 mb-6">Categories</h3>
             <ul className="space-y-4">
